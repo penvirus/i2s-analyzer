@@ -83,3 +83,8 @@ cmake ..
 ```
 
 Then, open the newly created solution file located here: `build\i2s_analyzer.sln`
+
+## Screenshot
+
+![](1.png)
+![](2.png)
