@@ -293,12 +293,12 @@ bool I2sAnalyzer::NeedsRerun()
 
 const char* I2sAnalyzer::GetAnalyzerName() const
 {
-	return "I2S / PCM";
+	return "(extended) I2S / PCM";
 }
 
 const char* GetAnalyzerName()
 {
-	return "I2S / PCM";
+	return "(extended) I2S / PCM";
 }
 
 Analyzer* CreateAnalyzer()

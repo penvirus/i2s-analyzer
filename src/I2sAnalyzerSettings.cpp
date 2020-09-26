@@ -108,9 +108,12 @@ I2sAnalyzerSettings::I2sAnalyzerSettings()
 	AddInterface( mWordSelectInvertedInterface.get() );
 
 	//AddExportOption( 0, "Export as text/csv file", "text (*.txt);;csv (*.csv)" );
-	AddExportOption( 0, "Export as text/csv file" );
-	AddExportExtension( 0, "text", "txt" );
-	AddExportExtension( 0, "csv", "csv" );
+	AddExportOption( USER_ID_CSV, "Export as text/csv file" );
+	AddExportExtension( USER_ID_CSV, "text", "txt" );
+	AddExportExtension( USER_ID_CSV, "csv", "csv" );
+
+	AddExportOption( USER_ID_RAW, "Export as audio raw file" );
+	AddExportExtension( USER_ID_RAW, "raw", "raw" );
 
 	ClearChannels();
 	AddChannel( mClockChannel, "PCM CLOCK", false );

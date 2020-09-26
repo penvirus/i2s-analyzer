@@ -86,7 +86,53 @@ void I2sAnalyzerResults::GenerateBubbleText( U64 frame_index, Channel& /*channel
 	}
 }
 
-void I2sAnalyzerResults::GenerateExportFile( const char* file, DisplayBase display_base, U32 /*export_type_user_id*/ )
+void I2sAnalyzerResults::GenerateExportFile( const char* file, DisplayBase display_base, U32 export_type_user_id )
+{
+	switch (export_type_user_id) {
+	case USER_ID_RAW:
+		ExportRAWAudio( file );
+		break;
+	default:
+	case USER_ID_CSV:
+		ExportCSV( file, display_base );
+		break;
+	}
+}
+
+void I2sAnalyzerResults::ExportRAWAudio( const char* file )
+{
+	void* f = AnalyzerHelpers::StartFile( file, true /* is_binary */ );
+	U64 num_frames = GetNumFrames();
+
+	for( U64 i=0; i < num_frames; i++ )
+	{
+		Frame frame = GetFrame( i );
+		U64 data = frame.mData1;
+		U32 data_length = (mSettings->mBitsPerWord + (8 - 1)) / 8;
+		U8 *data_p = (U8 *)&data;
+
+		switch ( I2sResultType( frame.mType ) ) {
+		case Channel1:
+		case Channel2:
+			AnalyzerHelpers::AppendToFile( data_p, data_length, f );
+			break;
+		default:
+			AnalyzerHelpers::EndFile( f );
+			break;
+		}
+
+		if( UpdateExportProgressAndCheckForCancel( i, num_frames ) == true )
+		{
+			AnalyzerHelpers::EndFile( f );
+			return;
+		}
+	}
+
+	UpdateExportProgressAndCheckForCancel( num_frames, num_frames );
+	AnalyzerHelpers::EndFile( f );
+}
+
+void I2sAnalyzerResults::ExportCSV( const char* file, DisplayBase display_base )
 {
 	std::stringstream ss;
 	void* f = AnalyzerHelpers::StartFile( file );

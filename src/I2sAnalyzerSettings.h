@@ -8,6 +8,7 @@ enum PcmFrameType { FRAME_TRANSITION_TWICE_EVERY_WORD, FRAME_TRANSITION_ONCE_EVE
 enum PcmWordAlignment { LEFT_ALIGNED, RIGHT_ALIGNED };
 enum PcmBitAlignment { BITS_SHIFTED_RIGHT_1, NO_SHIFT };
 enum PcmWordSelectInverted { WS_INVERTED, WS_NOT_INVERTED };
+enum ExportUserId { USER_ID_CSV, USER_ID_RAW };
 
 class I2sAnalyzerSettings : public AnalyzerSettings
 {

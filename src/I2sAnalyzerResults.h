@@ -23,6 +23,8 @@ public:
 	virtual void GenerateTransactionTabularText( U64 transaction_id, DisplayBase display_base );
 
 protected: //functions
+	void ExportCSV( const char *file, DisplayBase display_base );
+	void ExportRAWAudio( const char *file );
 
 protected:  //vars
 	I2sAnalyzerSettings* mSettings;
