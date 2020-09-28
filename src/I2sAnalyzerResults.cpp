@@ -88,7 +88,7 @@ void I2sAnalyzerResults::GenerateBubbleText( U64 frame_index, Channel& /*channel
 
 void I2sAnalyzerResults::GenerateExportFile( const char* file, DisplayBase display_base, U32 export_type_user_id )
 {
-	switch (export_type_user_id) {
+	switch( export_type_user_id ) {
 	case USER_ID_RAW:
 		ExportRAWAudio( file );
 		break;
@@ -111,7 +111,7 @@ void I2sAnalyzerResults::ExportRAWAudio( const char* file )
 		U32 data_length = (mSettings->mBitsPerWord + (8 - 1)) / 8;
 		U8 *data_p = (U8 *)&data;
 
-		switch ( I2sResultType( frame.mType ) ) {
+		switch( I2sResultType( frame.mType ) ) {
 		case Channel1:
 		case Channel2:
 			AnalyzerHelpers::AppendToFile( data_p, data_length, f );
